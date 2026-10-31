@@ -35,28 +35,15 @@
       "url": "https://github.com/linkease/nas-packages.git",
       "commit": "2fc436d5507bd90f00093fd4a94b93968acce32b"
     },
-    "wrtbwmon-luci": {
-      "url": "https://github.com/brvphoenix/luci-app-wrtbwmon.git",
-      "commit": "f1b59b2309a0bc45511a1e7432c6c72f080a47d7"
-    },
-    "bandix-luci": {
-      "url": "https://github.com/timsaya/luci-app-bandix.git",
-      "commit": "108369b8da05f01296a3ed0210a2ab60809712e5"
-    },
-    "bandix-backend": {
-      "url": "https://github.com/timsaya/openwrt-bandix.git",
-      "commit": "0760d1f5b52d1a2317dfd171ab00fe6543a9a0c4"
-    },
+  
+    
+    
     "nikki": {
       "url": "https://github.com/nikkinikki-org/OpenWrt-nikki.git",
       "commit": "78e1a751d55ed0762811f054ee699049473da7b8",
       "archive_sha256": "184c30bb6497666c6d14ffd9bf5bad436513a0b86cf82b922b8fccabaf6ec1e0"
     },
-    "wrtbwmon": {
-      "url": "https://github.com/brvphoenix/wrtbwmon.git",
-      "commit": "f82f9b393842d2113c3253a4902af50bfc757e1a",
-      "archive_sha256": "bea34a8d29e63ce9576c7ce83548f2c92646acf40f7e01b3da540101dd757f14"
-    },
+   
     "poweroffdevice": {
       "url": "https://github.com/sirpdboy/luci-app-poweroffdevice.git",
       "commit": "8f53359c3234c7c398b846b5425f9b0b017c03ec"
