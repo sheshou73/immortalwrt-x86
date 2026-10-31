@@ -95,7 +95,7 @@ def main():
     for name in ['honk', 'luci-app-honk', 'luci-lib-daeuniverse']:
         shutil.copytree(PROJECT / 'packages' / name, custom / name)
     for name, source in links.items():
-        assert (source / 'Makefile').is_file() or name in ['nikki', 'daede', 'istore', 'wrtbwmon-luci'], source
+        assert (source / 'Makefile').is_file() or name in ['nikki', 'daede', 'istore'], source
         (custom / name).symlink_to(source, target_is_directory=True)
     run(['./scripts/feeds', 'update', '-i', 'packages', 'luci', 'routing'], core)
     run(['./scripts/feeds', 'install', '-a'], core)
