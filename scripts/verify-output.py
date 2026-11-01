@@ -87,9 +87,15 @@ def main():
         'luci-app-irqbalance', 'luci-app-banip', 'luci-app-passwall2',
         'luci-app-transmission', 'luci-app-nlbwmon', 'luci-app-adblock-fast',
 
+        # Aria2
         'aria2', 'aria2-openssl', 'ariang', 'luci-app-aria2',
-        'bandix', 'luci-app-bandix',
+        'luci-i18n-aria2-zh-cn',
 
+        # Bandix
+        'bandix', 'luci-app-bandix',
+        'luci-i18n-bandix-zh-cn',
+
+        # FRP
         'frpc', 'frps', 'luci-app-frpc', 'luci-app-frps',
 
         'minidlna', 'luci-app-minidlna',
@@ -103,10 +109,7 @@ def main():
         'mwan3', 'luci-app-mwan3',
 
         'wrtbwmon', 'luci-app-wrtbwmon',
-                # Aria2
-        'luci-i18n-aria2-zh-cn',
-        'bandix', 'luci-app-bandix',
-        'luci-i18n-bandix-zh-cn',
+
 
         # FRP
         'luci-i18n-frpc-zh-cn',
