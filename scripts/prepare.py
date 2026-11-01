@@ -74,8 +74,8 @@ def main():
         'luci-app-nikki': paths['nikki'] / 'luci-app-nikki',
         'nikki': paths['nikki'] / 'nikki',
         'mihomo-meta': paths['nikki'] / 'mihomo-meta',
-        'quickstart': paths['nas-packages'] / 'network/services/quickstart',
-        'luci-app-quickstart': paths['nas-luci'] / 'luci/luci-app-quickstart',
+        
+       
         'luci-app-poweroffdevice': paths['poweroffdevice'] / 'luci-app-poweroffdevice',
         'luci-app-partexp': paths['partexp'] / 'luci-app-partexp',
         'luci-app-easytier': paths['easytier'] / 'luci-app-easytier',
