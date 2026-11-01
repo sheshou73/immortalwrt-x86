@@ -19,7 +19,7 @@ for makefile in (root / 'packages').glob('*/Makefile'):
     recipe = makefile.read_text(encoding='utf-8')
     assert re.search(r'\b(?:BuildPackage|KernelPackage)\b', recipe), f'Missing OpenWrt package scan signature: {makefile}'
 luci_apps = [name for name in selected if name.startswith('luci-app-') and '_' not in name]
-assert len(luci_apps) == 31, len(luci_apps)
+assert len(luci_apps) == 32, len(luci_apps)
 assert {'luci-i18n-adguardhome-zh-cn', 'luci-app-turboacc', 'luci-i18n-turboacc-zh-cn', 'kmod-tcp-bbr', 'kmod-sched', 'kmod-lib-textsearch'} <= selected
 assert 'luci-app-bbr' not in selected
 assert not any('bandix-plus' in name or ('tables' in name and 'legacy' in name) for name in selected)
