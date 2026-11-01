@@ -145,6 +145,21 @@ def main():
                     print('\n'.join(content[i:i+30]))
                     break
     resolved = (core / '.config').read_text(encoding='utf-8')
+    print("ARGON CONFIG COMPARISON:")
+    for name in [
+        'CONFIG_PACKAGE_luci-theme-argon',
+        'CONFIG_PACKAGE_luci-app-argon-config',
+        'CONFIG_PACKAGE_luci-i18n-argon-config-zh-cn',
+        'CONFIG_DEFAULT_luci-app-argon-config',
+        'CONFIG_ALL',
+    ]:
+        for label, content in [('SEED', seed), ('RESOLVED', resolved)]:
+            value = next(
+                (line for line in content.splitlines()
+                 if line.startswith(name + '=') or line == '# ' + name + ' is not set'),
+                'NOT FOUND'
+            )
+            print(f"{label}: {value}")
     missing, extra = selected(seed) - selected(resolved), selected(resolved) - selected(seed)
     print("ARGON CONFIG CHECK:")
     for line in resolved.splitlines():
