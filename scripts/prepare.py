@@ -115,6 +115,15 @@ def main():
     run(['make', 'defconfig'], core)
     resolved = (core / '.config').read_text(encoding='utf-8')
     missing, extra = selected(seed) - selected(resolved), selected(resolved) - selected(seed)
+    print("ARGON CONFIG CHECK:")
+    for line in (work / ".config").read_text().splitlines():
+        if "LUCI_LANG_zh_Hans" in line or "argon-config" in line:
+           print(line)
+
+   assert not missing and not extra, {
+      'packages_missing': sorted(missing),
+      'packages_extra': sorted(extra)
+   }
     assert not missing and not extra, {'packages_missing': sorted(missing), 'packages_extra': sorted(extra)}
     assert 'CONFIG_TARGET_ROOTFS_PARTSIZE=4096' in resolved
     assert 'CONFIG_TARGET_KERNEL_PARTSIZE=128' in resolved
