@@ -63,6 +63,16 @@ def main():
     }
 
     assert required_apps <= names, sorted(required_apps - names)
+    assert {
+        'luci-app-diskman',
+        'luci-i18n-diskman-zh-cn',
+        'btrfs-progs',
+        'kmod-fs-btrfs',
+        'lsblk',
+        'netdata',
+        'luci-app-netdata',
+        'luci-i18n-netdata-zh-cn'
+    } <= names
 
     assert {
         'kmod-tcp-bbr', 'kmod-sched', 'kmod-lib-textsearch',
