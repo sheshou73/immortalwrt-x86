@@ -102,7 +102,28 @@ def main():
 
         'mwan3', 'luci-app-mwan3',
 
-        'wrtbwmon', 'luci-app-wrtbwmon'
+        'wrtbwmon', 'luci-app-wrtbwmon'，
+                # Aria2
+        'luci-i18n-aria2-zh-cn',
+
+        # FRP
+        'luci-i18n-frpc-zh-cn',
+        'luci-i18n-frps-zh-cn',
+
+        # miniDLNA
+        'luci-i18n-minidlna-zh-cn',
+
+        # MultiWAN
+        'luci-i18n-mwan3-zh-cn',
+
+        # OpenVPN
+        'luci-i18n-openvpn-zh-cn',
+
+        # vlmcsd
+        'luci-i18n-vlmcsd-zh-cn',
+
+        # wrtbwmon
+        'luci-i18n-wrtbwmon-zh-cn',
     }
 
     assert not names & removed
