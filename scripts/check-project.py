@@ -42,7 +42,9 @@ print(json.dumps({'source_repositories': len(lock['repositories']), 'config_sele
 
 updates = json.loads((root / "updates.lock.json").read_text(encoding="utf-8"))
 for relative, digest in updates["overlay_sha256"].items():
-    assert hashlib.sha256((root / relative).read_bytes()).hexdigest() == digest, relative
+    actual = hashlib.sha256((root / relative).read_bytes()).hexdigest()
+    print(f"SHA256 {relative}: {actual}")
+    assert actual == digest, relative
 profile = (root / "files/etc/uci-defaults/99-custom-build-profile").read_text(encoding="utf-8")
 assert "openclash passwall dae" not in profile
 assert "/etc/init.d/passwall enable" in profile
