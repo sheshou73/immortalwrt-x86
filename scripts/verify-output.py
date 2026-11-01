@@ -223,11 +223,27 @@ def main():
     shutil.copy2(PROJECT / 'honk.lock.json', output / 'honk.lock.json')
     shutil.copy2(PROJECT / 'oaf.lock.json', output / 'oaf.lock.json')
     shutil.copy2(lmo, output / lmo.name)
-    report = {'checked': datetime.datetime.now(datetime.timezone.utc).isoformat(),
-              'baseline': '20261023-r4', 'profile': '20261030-r9-oaf', 'packages': len(names), 'luci_apps': len(required_apps),
-              'images': images, 'kernel_flags_verified': flags, 'adguardhome_lmo_in_rootfs': True,
-              'runtime_boot_tested_this_build': False, 'runtime_translation_http_tested_this_build': False}
-    (output / 'build-verification.json').write_text(json.dumps(report, indent=2))
+
+    sources = json.loads(
+        (PROJECT / 'sources.lock.json').read_text(encoding='utf-8')
+    )
+
+    report = {
+        'checked': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        'baseline': sources['baseline'],
+        'profile': sources['profile'],
+        'packages': len(names),
+        'luci_apps': len(required_apps),
+        'images': images,
+        'kernel_flags_verified': flags,
+        'adguardhome_lmo_in_rootfs': True,
+        'runtime_boot_tested_this_build': False,
+        'runtime_translation_http_tested_this_build': False
+    }
+
+    (output / 'build-verification.json').write_text(
+        json.dumps(report, indent=2)
+    )
     sums = []
     for file in sorted(output.iterdir()):
         with file.open('rb') as stream:
