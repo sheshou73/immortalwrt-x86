@@ -41,51 +41,96 @@ def main():
     core = args.work.resolve() / 'immortalwrt'
     target = core / 'bin/targets/x86/64'
     subprocess.run(['sha256sum', '-c', 'sha256sums'], cwd=target, check=True)
-    names = {line.split(' - ')[0] for line in next(target.glob('*.manifest')).read_text(encoding='utf-8').splitlines()}
-    config_text = (PROJECT / 'configs/x86-64.config').read_text(encoding='utf-8')
-required_apps = {
-    line.split('=', 1)[0].removeprefix('CONFIG_PACKAGE_')
-    for line in config_text.splitlines()
-    if line.startswith('CONFIG_PACKAGE_luci-app-') and line.endswith('=y')
-}
-required_apps |= {
-    'luci-app-oaf',
-    'luci-app-honk',
-    'luci-app-turboacc',
-    'luci-app-partexp',
-    'luci-app-poweroffdevice',
-    'luci-app-easytier'
-}
-    assert required_apps <= names, sorted(required_apps - names)
-    assert {'kmod-tcp-bbr', 'kmod-sched', 'kmod-lib-textsearch', 'bandix', 'dae', 'daed', 'firewall4', 'nftables-json', 'iptables-nft', 'ip6tables-nft', 'kmod-fs-cifs', 'vlmcsd', 'luci-i18n-adguardhome-zh-cn'} <= names
-    assert {'luci-i18n-partexp-zh-cn', 'luci-i18n-poweroffdevice-zh-cn'} <= names
-    assert {'luci-i18n-turboacc-zh-cn', 'kmod-nft-fullcone', 'kmod-nft-offload'} <= names
- removed = {
-    'luci-app-bbr', 'luci-app-acme', 'luci-app-https-dns-proxy',
-    'luci-app-irqbalance', 'luci-app-banip', 'luci-app-passwall2',
-    'luci-app-transmission', 'luci-app-nlbwmon', 'luci-app-adblock-fast',
-    'aria2', 'aria2-openssl', 'ariang', 'luci-app-aria2',
-    'bandix', 'luci-app-bandix',
-    'frpc', 'frps', 'luci-app-frpc', 'luci-app-frps',
-    'minidlna', 'luci-app-minidlna',
-    'mdadm', 'smartd', 'smartmontools', 'smartmontools-drivedb',
-    'openvpn-openssl', 'luci-app-openvpn',
-    'vlmcsd', 'luci-app-vlmcsd',
-    'mwan3', 'luci-app-mwan3',
-    'wrtbwmon', 'luci-app-wrtbwmon'
-}
-assert not names & removed
-assert not any('bandix-plus' in name or ('tables' in name and 'legacy' in name) for name in names)
+    names = {
+        line.split(' - ')[0]
+        for line in next(target.glob('*.manifest')).read_text(encoding='utf-8').splitlines()
+    }
 
-baseline_names = {
-    line.split(' - ')[0]
-    for line in (PROJECT / 'docs/baseline-r6/firmware.manifest').read_text().splitlines()
-}
-assert baseline_names - removed <= names, sorted((baseline_names - removed) - names)
-    versions = dict(line.split(' - ', 1) for line in next(target.glob('*.manifest')).read_text().splitlines())
+    config_text = (PROJECT / 'configs/x86-64.config').read_text(encoding='utf-8')
+    required_apps = {
+        line.split('=', 1)[0].removeprefix('CONFIG_PACKAGE_')
+        for line in config_text.splitlines()
+        if line.startswith('CONFIG_PACKAGE_luci-app-') and line.endswith('=y')
+    }
+
+    required_apps |= {
+        'luci-app-oaf',
+        'luci-app-honk',
+        'luci-app-turboacc',
+        'luci-app-partexp',
+        'luci-app-poweroffdevice',
+        'luci-app-easytier'
+    }
+
+    assert required_apps <= names, sorted(required_apps - names)
+
+    assert {
+        'kmod-tcp-bbr', 'kmod-sched', 'kmod-lib-textsearch',
+        'dae', 'daed', 'firewall4', 'nftables-json',
+        'iptables-nft', 'ip6tables-nft', 'kmod-fs-cifs',
+        'luci-i18n-adguardhome-zh-cn'
+    } <= names
+
+    assert {
+        'luci-i18n-partexp-zh-cn',
+        'luci-i18n-poweroffdevice-zh-cn'
+    } <= names
+
+    assert {
+        'luci-i18n-turboacc-zh-cn',
+        'kmod-nft-fullcone',
+        'kmod-nft-offload'
+    } <= names
+
+    removed = {
+        'luci-app-bbr', 'luci-app-acme', 'luci-app-https-dns-proxy',
+        'luci-app-irqbalance', 'luci-app-banip', 'luci-app-passwall2',
+        'luci-app-transmission', 'luci-app-nlbwmon', 'luci-app-adblock-fast',
+
+        'aria2', 'aria2-openssl', 'ariang', 'luci-app-aria2',
+        'bandix', 'luci-app-bandix',
+
+        'frpc', 'frps', 'luci-app-frpc', 'luci-app-frps',
+
+        'minidlna', 'luci-app-minidlna',
+
+        'mdadm', 'smartd', 'smartmontools', 'smartmontools-drivedb',
+
+        'openvpn-openssl', 'luci-app-openvpn',
+
+        'vlmcsd', 'luci-app-vlmcsd',
+
+        'mwan3', 'luci-app-mwan3',
+
+        'wrtbwmon', 'luci-app-wrtbwmon'
+    }
+
+    assert not names & removed
+    assert not any(
+        'bandix-plus' in name or ('tables' in name and 'legacy' in name)
+        for name in names
+    )
+
+    baseline_names = {
+        line.split(' - ')[0]
+        for line in (PROJECT / 'docs/baseline-r6/firmware.manifest').read_text().splitlines()
+    }
+
+    assert baseline_names - removed <= names, sorted((baseline_names - removed) - names)
+
+    versions = dict(
+        line.split(' - ', 1)
+        for line in next(target.glob('*.manifest')).read_text().splitlines()
+    )
+
     updates = json.loads((PROJECT / 'updates.lock.json').read_text())
-    for package, expected in {**updates['frozen_versions'], **updates['expected_versions']}.items():
-        assert versions.get(package) == expected, (package, versions.get(package), expected)
+    for package, expected in {
+        **updates['frozen_versions'],
+        **updates['expected_versions']
+    }.items():
+        assert versions.get(package) == expected, (
+            package, versions.get(package), expected
+        )
     images = []
     for filesystem in ['ext4', 'squashfs']:
         for boot in ['combined', 'combined-efi']:
