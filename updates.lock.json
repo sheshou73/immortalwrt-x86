@@ -109,7 +109,7 @@
   
     "overlays/packages/net/tailscale/Makefile": "b5969b60fcabe9c0acb80c7977140b93c7182e096bc6f1f856124db7ef9f35c9",
     "overlays/packages/net/xray-core/Makefile": "8dc8a529179241d29b822ac9e4776ed765583c9f29397a2986ad0c82117bba13",
-    "overlays/luci/applications/luci-app-diskman/Makefile": "d0f42a082e64867081ce0ad94a97556058d37a8b83b0cff41088c2ee28b9e12a",
+    "overlays/luci/applications/luci-app-diskman/Makefile": "9d635bb9517f7cdb944ccb0f098833cd1f6fd7ec9d162d326f05da77c58ae2a9",
     "overlays/nikki/mihomo-meta/Makefile": "4b0df42887c0d908f6fa9c0d4194eb667469170b8e8022387efc4657fae77192"
   },
   "host_toolchains": {
