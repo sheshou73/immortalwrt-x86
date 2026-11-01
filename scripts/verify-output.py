@@ -102,9 +102,11 @@ def main():
 
         'mwan3', 'luci-app-mwan3',
 
-        'wrtbwmon', 'luci-app-wrtbwmon'，
+        'wrtbwmon', 'luci-app-wrtbwmon',
                 # Aria2
         'luci-i18n-aria2-zh-cn',
+        'bandix', 'luci-app-bandix',
+        'luci-i18n-bandix-zh-cn',
 
         # FRP
         'luci-i18n-frpc-zh-cn',
