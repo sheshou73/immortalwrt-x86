@@ -16,11 +16,7 @@
       "target": "packages",
       "path": "net/ddns-go"
     },
-    {
-      "source": "packages-updates",
-      "target": "packages",
-      "path": "net/frp"
-    },
+   
     {
       "source": "packages-updates",
       "target": "packages",
@@ -41,11 +37,7 @@
       "target": "packages",
       "path": "net/zerotier"
     },
-    {
-      "source": "packages-updates",
-      "target": "packages",
-      "path": "net/openvpn"
-    },
+ 
     {
       "source": "packages-updates",
       "target": "packages",
@@ -73,8 +65,8 @@
     }
   ],
   "expected_versions": {
-    "bandix": "0.12.12-r1",
-    "luci-app-bandix": "0.12.12-r5",
+   
+ 
     "adguardhome": "0.107.79-r1",
     "dae": "2026.10.18-r1",
     "daed": "2026.10.18-r2",
@@ -82,8 +74,7 @@
     "ddns-go": "6.17.7-r1",
     "ddns-scripts": "2.8.4-r8",
     "ddns-scripts-services": "2.8.4-r8",
-    "frpc": "0.71.1-r1",
-    "frps": "0.71.1-r1",
+   
     "luci-app-openclash": "0.48.002",
     "luci-app-passwall": "26.10.22-r1",
     "mihomo-meta": "1.19.33",
@@ -91,7 +82,7 @@
     "openlist": "4.2.9-r1",
     "tailscale": "1.104.4-r2",
     "zerotier": "1.16.2-r1",
-    "openvpn-openssl": "2.7.8-r2",
+  
     "miniupnpd-nftables": "2.3.11-r1",
     "sqm-scripts": "1.8.0-r1",
     "honk": "0.1.0_beta3-r1",
