@@ -113,6 +113,37 @@ def main():
     assert 'mihomo-meta' in selected(seed) and 'mihomo-alpha' not in selected(seed), 'r4 requires the selected stable Mihomo core'
     (core / '.config').write_text(seed)
     run(['make', 'defconfig'], core)
+    print("ARGON PACKAGE METADATA CHECK:")
+
+    for rel in [
+        'tmp/.config-package.in',
+        'tmp/.packageinfo',
+        'feeds/luci/applications/luci-app-argon-config/Makefile'
+    ]:
+        path = core / rel
+        print(f"\n--- {rel} exists={path.exists()} ---")
+
+        if not path.exists():
+            continue
+
+        content = path.read_text(errors='replace').splitlines()
+
+        if rel.endswith('Makefile'):
+            for line in content:
+                if any(x in line for x in ['LUCI_TITLE', 'LUCI_DEPENDS', 'LUCI_PKGARCH', 'include']):
+                    print(line)
+
+        elif rel.endswith('.config-package.in'):
+            for i, line in enumerate(content):
+                if 'PACKAGE_luci-app-argon-config' in line:
+                    print('\n'.join(content[i:i+25]))
+                    break
+
+        else:
+            for i, line in enumerate(content):
+                if 'Package: luci-app-argon-config' in line:
+                    print('\n'.join(content[i:i+30]))
+                    break
     resolved = (core / '.config').read_text(encoding='utf-8')
     missing, extra = selected(seed) - selected(resolved), selected(resolved) - selected(seed)
     print("ARGON CONFIG CHECK:")
