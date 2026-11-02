@@ -50,7 +50,10 @@ def main():
     required_apps = {
         line.split('=', 1)[0].removeprefix('CONFIG_PACKAGE_')
         for line in config_text.splitlines()
-        if line.startswith('CONFIG_PACKAGE_luci-app-') and line.endswith('=y')
+        if re.fullmatch(
+            r'CONFIG_PACKAGE_luci-app-[A-Za-z0-9][A-Za-z0-9+-]*=y',
+            line
+        )
     }
 
     required_apps |= {
