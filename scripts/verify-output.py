@@ -144,6 +144,7 @@ def main():
         'luci-i18n-wrtbwmon-zh-cn',
         # Quickstart
         'quickstart', 'luci-app-quickstart',
+        'luci-i18n-quickstart-zh-cn',
     }
 
     assert not names & removed
