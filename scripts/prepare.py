@@ -126,7 +126,11 @@ def main():
 
     fuse_lines = [
         line for line in config_text.splitlines()
-        if 'fuse3-utils' in line or 'libfuse3' in line
+        if any(x in line for x in [
+            'fuse3-utils',
+            'libfuse3',
+            'kmod-fuse',
+            ])
     ]
 
     (work / 'fuse3-config-after-defconfig.txt').write_text(
