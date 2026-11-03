@@ -113,6 +113,17 @@ def main():
     assert 'mihomo-meta' in selected(seed) and 'mihomo-alpha' not in selected(seed), 'r4 requires the selected stable Mihomo core'
     (core / '.config').write_text(seed)
     run(['make', 'defconfig'], core)
+    config_text = (core / '.config').read_text(errors='replace')
+
+    fuse_lines = [
+        line for line in config_text.splitlines()
+        if 'fuse3-utils' in line or 'libfuse3' in line
+    ]
+
+    (work / 'fuse3-config-after-defconfig.txt').write_text(
+        '\n'.join(fuse_lines) + '\n',
+        encoding='utf-8'
+    )
     fuse_diag = []
 
     for rel in [
