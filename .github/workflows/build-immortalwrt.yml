@@ -101,6 +101,7 @@ jobs:
             logs/
             work/preparation.json
             work/fuse3-diagnostic.txt
+            work/fuse3-config-before-defconfig.txt
             work/fuse3-config-after-defconfig.txt
             work/immortalwrt/.config
             work/immortalwrt/logs/
