@@ -113,6 +113,28 @@ def main():
     assert 'mihomo-meta' in selected(seed) and 'mihomo-alpha' not in selected(seed), 'r4 requires the selected stable Mihomo core'
     (core / '.config').write_text(seed)
     run(['make', 'defconfig'], core)
+        print("FUSE3 PACKAGE DIAGNOSTIC:")
+
+    for rel in [
+        'feeds/packages/utils/fuse3/Makefile',
+        'tmp/.config-package.in',
+        'tmp/.packageinfo',
+    ]:
+        path = core / rel
+        print(f"\n--- {rel} exists={path.exists()} ---")
+
+        if not path.exists():
+            continue
+
+        content = path.read_text(errors='replace').splitlines()
+
+        for i, line in enumerate(content):
+            if any(x in line for x in [
+                'fuse3-utils',
+                'libfuse3',
+                'PACKAGE_fuse3',
+            ]):
+                print('\n'.join(content[max(0, i-3):i+12]))
     print("ARGON PACKAGE METADATA CHECK:")
 
     for rel in [
