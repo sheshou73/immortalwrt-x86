@@ -112,6 +112,15 @@ def main():
     seed = (PROJECT / 'configs/x86-64.config').read_text(encoding='utf-8')
     assert 'mihomo-meta' in selected(seed) and 'mihomo-alpha' not in selected(seed), 'r4 requires the selected stable Mihomo core'
     (core / '.config').write_text(seed)
+
+    before = (core / '.config').read_text(errors='replace')
+    (work / 'fuse3-config-before-defconfig.txt').write_text(
+         '\n'.join(
+             line for line in before.splitlines()
+             if 'fuse3-utils' in line or 'libfuse3' in line
+         ) + '\n',
+    )
+    
     run(['make', 'defconfig'], core)
     config_text = (core / '.config').read_text(errors='replace')
 
