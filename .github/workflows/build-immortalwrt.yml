@@ -100,6 +100,7 @@ jobs:
           path: |
             logs/
             work/preparation.json
+            work/fuse3-diagnostic.txt
             work/immortalwrt/.config
             work/immortalwrt/logs/
           include-hidden-files: true
