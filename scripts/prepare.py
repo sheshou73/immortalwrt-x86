@@ -113,7 +113,7 @@ def main():
     assert 'mihomo-meta' in selected(seed) and 'mihomo-alpha' not in selected(seed), 'r4 requires the selected stable Mihomo core'
     (core / '.config').write_text(seed)
     run(['make', 'defconfig'], core)
-        print("FUSE3 PACKAGE DIAGNOSTIC:")
+    print("FUSE3 PACKAGE DIAGNOSTIC:")
 
     for rel in [
         'feeds/packages/utils/fuse3/Makefile',
